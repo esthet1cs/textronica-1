@@ -1,6 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# Version 0.3, 13.9.2019
+
+# Umstellung von Shell-Anteil auf pure Python using Tweepy
+
 # Version 0.2, 31.3.2015
 
 # Python-Implementierung des Programms zur Herstellung "Stochastische[r] Texte" wie von Theo Lutz in einem Aufsatz beschrieben -
@@ -27,6 +31,40 @@
 # Zufall im Moment interessanter. Eine komplette Ausrechnung des Algorithmus wird es dann als E-Book geben.
 
 import random
+import tweepy
+from tweepy import OAuthHandler
+from time import sleep
+import linecache
+
+# abstrakte struktur der bots:
+## authenticate with twitter
+## construct tweet
+## post tweet 
+
+## AUTHENTICATION
+
+with open('credentials', 'r') as f:             # Credentials einlesen; Bedingung ist eine Datei 'credentials' im gleichen Verzeichnis, in dem das Programm ausgeführt wird
+    credentials = json.loads(f.read())
+
+
+def authenticate(credentials):                  # Funktion für die Authentifizierung
+    '''
+    authenticates with the necessary credentials, returns the shortened api
+    '''
+    consumer_key = credentials['consumer_key']
+    consumer_secret = credentials['consumer_secret']
+    access_token = credentials['access_token']
+    access_token_secret = credentials['access_token_secret']
+
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
+    api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+    return api
+
+api = authenticate(credentials)                 # Gateway öffnen
+
+
+## TEXTGENERATION
 
 # satzmuster definieren
 
@@ -62,5 +100,26 @@ def elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate):
     elementarSatz = operator1 + " " + subjekt1 + " ist " + praedikat1 + random.choice(satzOperatoren) + operator2 + " " + subjekt2 + " ist " + praedikat2 + "."
     return elementarSatz.upper()
 
-print elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate)
+
+## check for duplicates
+
+with open('tweets', 'r') as f:      # read in all old tweets from file
+    tweets = f.read()
+    tweets = tweets.split('\n')
     
+def construct_tweet(tweets):
+    '''
+    construct a tweet using elementarSatz, then check if it exists already in the list of tweets, and if it does, build another one
+    '''
+    Tweet = elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate)  # construct the Tweet
+    if Tweet in tweets:
+        construct_tweet(tweets)
+    else:
+        api.update_status(Tweet)
+        tweets.append(Tweet)
+        with open('tweets', 'a') as f:
+            f.write(tweet)
+
+
+construct_tweet(tweets)
+sleep(3600)
