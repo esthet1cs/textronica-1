@@ -101,25 +101,6 @@ def elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate):
     return elementarSatz.upper()
 
 
-## check for duplicates
-
-with open('tweets', 'r') as f:      # read in all old tweets from file
-    tweets = f.read()
-    tweets = tweets.split('\n')
-    
-def construct_tweet(tweets):
-    '''
-    construct a tweet using elementarSatz, then check if it exists already in the list of tweets, and if it does, build another one
-    '''
-    Tweet = elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate)  # construct the Tweet
-    if Tweet in tweets:
-        construct_tweet(tweets)
-    else:
-        api.update_status(Tweet)
-        tweets.append(Tweet)
-        with open('tweets', 'a') as f:
-            f.write(tweet)
-
-
-construct_tweet(tweets)
-sleep(3600)
+Tweet = elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate)  # construct the Tweet
+api.update_status(Tweet)                                                    # send tweet
+sleep(3600)                                                                 # sleep for one hour
