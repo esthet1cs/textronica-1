@@ -38,3 +38,6 @@ cat footer.html >> stream.html
 
 rsync index.html $WEBDIR
 rsync stream.html $WEBDIR
+rsync xplain.html $WEBDIR
+rsync main.css $WEBDIR
+

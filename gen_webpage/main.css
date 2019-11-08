@@ -1,0 +1,13 @@
+body	{ background:black; color:white }
+
+.spalte { font-family:sans; font-size:12pt; margin:2% 20%; text-align:justify }
+
+p.single { text-align:center; font-family:Verdana,sans; margin:20% }
+
+.menu	{ vertical-align:bottom }
+
+a:link { color:grey; text-decoration:none }
+
+a:visited  { color:grey; text-decoration:none }
+
+a:hover  { color:blue }

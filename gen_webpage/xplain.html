@@ -1,0 +1,43 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="main.css">
+<title>
+ Textelectronica 1: Stochastische Texte (Erinnerung)
+</title>
+
+</head>
+
+<body class="spalte">
+
+<a href="index.html">aktuell</a> 
+<a href="xplain.html">über</a>
+<a href="stream.html">stream</a>
+<a href="http://twitter.com/botXpoet" target=_blank>twitter</a>
+<a href="mailto:botxpoet@weichzeichen.net">mail</a>
+
+
+<h2>Textronica 1: Stochastische Texte </h2>
+
+botXpoet ist ein Computerprogramm (genau genommen zwei Computerprogramme und ganz genau genommen eine Unzahl an Computerprogrammen), das eine der ersten Implementierungen eines Textgenerators auf einer universalen Ziffernrechenmaschine wiederholt. Dieser frühe Textgenerator, konzipiert und programmiert von Theo Lutz und Rul Gunzenhäuser, lief 1959 auf einem Zuse Z22 im Rechenzentrum der Universität Stuttgart. Produziert wurden damals 50 Sätze, von denen 35 kurze Zeit später in einer wissenschaftlichen Zeitschrift erschienen, im Anschluss an einen Artikel von Theo Lutz zur Wahrheit und Methode des durchgeführten Textexperiments. (Wiederabdruck in: Theo Lutz: Stochastische Texte, in: Barbara Büscher, Hans-Christian von Herrmann, Christoph Hoffmann: ästhetik als programm. Max Bense / daten und streuungen, Berlin 2004, S. 165-169.
+<p>
+Im Anschluss an diesen Nachdruck des Aufsatzes (Erstdruck 1959) findet sich ein Faksimile des originalen Fernschreiberausdrucks (das direkte Ergebnis der Versuche von Theo Lutz und Rul Gunzenhäuser, eine Bildschirmausgabe gab es damals nicht). Beim Vergleich der im Aufsatz wiedergegebenen Texte mit dem Fernschreiberausdruck fallen fünf Unterschiede ins Auge:
+<ol>
+<li> Das Leerzeichen vor dem Punkt, der die beiden Elementarsätze trennt, und das Fehlen eines Leerzeichens nach diesem Punkt
+<li> Die fehlende Deklination von "FREMDE" im Fernschreiberausdruck, dort heißt es "KEIN FREMDE IST NEU", weil eine Flexion der Nomen nicht vorgesehen war. Dabei ist der FREMDE das einzige Wort, bei dem für die die Negation mit den unbestimmten Artikeln (ein, kein) eine Flexion erforderlich wäre.
+<li> Auf dem Fernschreiberausdruck fehlt der Punkt am Ende jeder Zeile
+<li> Die Reduktion von Umlauten auf den Stammlaut (WUTEND statt WÜTEND usw.).
+<li> Die Zusammenschreibung von SOGILT (im redigierten Text getrennt)
+</ol>
+
+Das vorliegende Programm ist eine Re-Implementierung des Textgenerators, die stillschweigenden Korrekturen am Text des Fernschreiberausdruck wurden zur Verbesserung der Lesbarkeit implementiert. Ausgenommen davon ist der FREMDE. Um hier grammatische Korrektheit zu erreichen, ohne eine Flexion programmieren zu müssen, und um das gendering im Text zu reflektieren, wurde schlicht von Maskulinum auf Femininum geschaltet.
+<p>
+Kurz: Das Programm generiert einzelne Sätze im Stil der "Stochastischen Texte", die dann von botXpoet <a href="index.html">aktuell</a>, im <a href="stream.html">vollständigen stream</a> und bei <a href="https://twitter.com/botxpoet" target=_blank>Twitter</a> gepostet werden. Neue Sätze werden mit einer Frequenz von einer halben Stunde generiert, das heißt jede halbe Stunde ändert sich der Satz aktuell, wird ein Satz dem vollständigen Stream hinzugefügt und bei Twitter gepostet.
+<p> Theoretisch können 4 * (4 * 16 * 16)**2 = 4.194.304 verschiedene Sätze generiert werden. Würde jeder Satz nur einmal gepostet, müsste botXpoet bei ununterbrochener Tätigkeit 2.097.152 Stunden oder 87381 Tage oder 12.483 Wochen oder 2.912 Monate oder 239.4 Jahre arbeiten. Der Vorrat an Möglichkeiten ist also bezifferbar und doch fast unerschöpflich. Der Rest ist die Lust an kontingenten Kollisionen und Kontexten.
+<p>
+Das düstere Setup der Twitterseite liegt an den düsteren Assoziationen bei der Lektüre von Franz Kafkas Roman 'Das Schloß', das Vokabular der 'Stochastischen Texte' und damit von botXpoet speist sich aus diesem Text.
+
+<p>
+
+</div>
+</body>
+</html>
