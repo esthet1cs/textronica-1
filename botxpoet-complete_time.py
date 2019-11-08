@@ -43,30 +43,54 @@ subjektGeschlecht = {"graf":0, "fremde":1, "blick":0, "kirche":1, "schloss":2, "
 
 praedikate = ["offen","still","stark","gut","schmal","nah","neu","leise","fern","tief","spaet","dunkel","frei","gross","alt","wuetend"]
 
-satzOperatoren = [" und "," oder "," so gilt ",". "] # wahrscheinlichkeiten über anzahl der elemente in der liste gelöst
-
-saetze = []
-for subjekt1 in subjekte:
-    print('S1: ' + subjekt1)
-    for subjekt2 in subjekte:
-        print('S2: ' + subjekt2)
-        for operator1 in operatoren:
-            operator1 = operator1[subjektGeschlecht[subjekt1]]
-            print('OP1: ' + operator1)
-            for operator2 in operatoren:
-                operator2 = operator2[subjektGeschlecht[subjekt2]]
-                print('OP2: ' + operator2)
-                for praedikat1 in praedikate:
-                    for praedikat2 in praedikate:
-                        for satz_operator in satzOperatoren:
-                            elementarSatz = operator1 + " " + subjekt1 + " ist " + praedikat1 + satz_operator + operator2 + " " + subjekt2 + " ist " + praedikat2 + "."
-                            saetze.append(elementarSatz)
-
+satzOperatoren = [" und "," oder "," so gilt ",". ",". ",". ",". ",". "] # wahrscheinlichkeiten über anzahl der elemente in der liste gelöst
 
 with open('stochastische_texte_volltext.txt', 'w') as f:
-    while len(saetze) > 0:
-        satz = random.choice(saetze)
-        saetze.remove(satz)
-        f.write(satz)
+    for subjekt1 in subjekte:
+        for subjekt2 in subjekte:
+            for operator1 in operatoren:
+                operator1 = operator1[subjektGeschlecht[subjekt1]]
+                for operator2 in operatoren:
+                    operator2 = operator2[subjektGeschlecht[subjekt2]]
+                    for praedikat1 in praedikate:
+                        for praedikat2 in praedikate:
+                            elementarSatz = operator1 + " " + subjekt1 + " ist " + praedikat1 + random.choice(satzOperatoren) + operator2 + " " + subjekt2 + " ist " + praedikat2 + "."
+                            f.write(elementarSatz + '\n')
 
+
+# elementarsatz zusammenstellen
+
+# elemente auswählen und elementarsatz zusammenstellen
+def elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate):
+    '''
+    wählt aus den gegebenen mengen die notwendigen Elemente aus und generiert eine Zeile (
+    '''
+    subjekt1 = random.choice(subjekte)
+    subjekt2 = random.choice(subjekte)
+    operator1 = random.choice(operatoren)[subjektGeschlecht[subjekt1]]
+    operator2 = random.choice(operatoren)[subjektGeschlecht[subjekt2]]
+    praedikat1 = random.choice(praedikate)
+    praedikat2 = random.choice(praedikate)
+
+    elementarSatz = operator1 + " " + subjekt1 + " ist " + praedikat1 + random.choice(satzOperatoren) + operator2 + " " + subjekt2 + " ist " + praedikat2 + "."
+    return elementarSatz.upper()
+
+
+def dopplung(satz):
+    '''
+    prüft, ob satz in der datei tweets vorhanden ist.
+    wenn ja, wird ein neuer satz erzeugt und wiederum geprüft
+    wenn nein, wird der satz ausgegeben
+    '''
+# liste aus der datei tweets einlesen
+    with open('/home/cms/python/programs/textgen/tweets') as tweets:
+        if satz in tweets: # prüfen, ob satz in tweets
+            # wenn ja, neuer satz, und wieder prüfen, sonst satz ausgeben
+            satz = elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate)
+            dopplung(satz)
+        else:
+            print satz
+            
+satz = elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate)
+dopplung(satz)
 

@@ -5,6 +5,7 @@
 
 # Umstellung von Shell-Anteil auf pure Python using Tweepy
 
+
 # Version 0.2, 31.3.2015
 
 # Python-Implementierung des Programms zur Herstellung "Stochastische[r] Texte" wie von Theo Lutz in einem Aufsatz beschrieben -
@@ -103,4 +104,3 @@ def elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate):
 
 Tweet = elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate)  # construct the Tweet
 api.update_status(Tweet)                                                    # send tweet
-sleep(3600)                                                                 # sleep for one hour
