@@ -47,26 +47,26 @@ satzOperatoren = [" und "," oder "," so gilt ",". "] # wahrscheinlichkeiten übe
 
 saetze = []
 for subjekt1 in subjekte:
-    print('S1: ' + subjekt1)
-    for subjekt2 in subjekte:
-        print('S2: ' + subjekt2)
-        for operator1 in operatoren:
-            operator1 = operator1[subjektGeschlecht[subjekt1]]
-            print('OP1: ' + operator1)
-            for operator2 in operatoren:
-                operator2 = operator2[subjektGeschlecht[subjekt2]]
-                print('OP2: ' + operator2)
-                for praedikat1 in praedikate:
-                    for praedikat2 in praedikate:
-                        for satz_operator in satzOperatoren:
+    for operator1 in operatoren:
+        operator1 = operator1[subjektGeschlecht[subjekt1]]
+        for praedikat1 in praedikate:
+            for satz_operator in satzOperatoren:
+                for subjekt2 in subjekte:
+                    for operator2 in operatoren:
+                        operator2 = operator2[subjektGeschlecht[subjekt2]]
+                        for praedikat2 in praedikate:
                             elementarSatz = operator1 + " " + subjekt1 + " ist " + praedikat1 + satz_operator + operator2 + " " + subjekt2 + " ist " + praedikat2 + "."
                             saetze.append(elementarSatz)
 
+print('Finished generating.')
+saetze.sort()
+print('Alle Sätze sortiert.')
+print('Now saving to file...')
 
-with open('stochastische_texte_volltext.txt', 'w') as f:
-    while len(saetze) > 0:
-        satz = random.choice(saetze)
-        saetze.remove(satz)
+with open('stochastische_texte_volltext_sortiert.txt', 'w') as f:
+    for satz in saetze:
         f.write(satz)
+        f.write('\n')
 
+print('Done.')
 

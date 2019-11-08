@@ -44,7 +44,9 @@ import linecache
 
 ## AUTHENTICATION
 
-with open('credentials', 'r') as f:             # Credentials einlesen; Bedingung ist eine Datei 'credentials' im gleichen Verzeichnis, in dem das Programm ausgeführt wird
+credentials = '/home/user/dock/textgen/credentials'     # fill in the path where to find the credentials (needs to be a python dictionary in json format)
+
+with open(credentials, 'r') as f:             # Credentials einlesen
     credentials = json.loads(f.read())
 
 
@@ -104,3 +106,5 @@ def elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate):
 
 Tweet = elementarSatz(operatoren, subjekte, subjektGeschlecht, praedikate)  # construct the Tweet
 api.update_status(Tweet)                                                    # send tweet
+print(Tweet)
+
